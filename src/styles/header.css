@@ -1,0 +1,31 @@
+.header {
+  display: flex;
+  width: 100%;
+  padding: 0;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-self: start;
+}
+.upper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.inv {
+  margin-left: 1em;
+  color: #db4437;
+}
+.logocompany img {
+  position: absolute;
+  left: 0;
+  margin: 1em 0 0 1em;
+}
+
+.logohrc img {
+  margin-top: 1em;
+}
+@media only screen and (max-width: 767px) {
+}
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+}

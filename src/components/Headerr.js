@@ -1,6 +1,8 @@
 import React from "react";
+
 import abclogo from "../images/abclogo.svg";
 import hrclogo from "../images/hrclogo.svg";
+import "../styles/header.css";
 
 const Headerr = () => {
   return (
