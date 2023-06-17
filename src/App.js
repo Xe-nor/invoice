@@ -1,4 +1,3 @@
-import "./App.css";
 import Headerr from "./components/Headerr.js";
 import Footerr from "./components/Footerr.js";
 
