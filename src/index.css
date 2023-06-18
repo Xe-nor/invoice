@@ -6,7 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  padding: 0;
+  padding: 1em;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -19,7 +19,9 @@ code {
 
 .Footer {
   display: flex;
-  width: 100%;
+  width: -moz-available;
+  width: -webkit-fill-available;
+  width: stretch;
   align-self: start;
   justify-content: center;
   position: absolute;
