@@ -87,3 +87,8 @@
   border: none;
   border-radius: 5px;
 }
+
+.datagrid-footer {
+  border: none;
+  color: white;
+}

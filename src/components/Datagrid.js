@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Autocomplete, TextField } from "@mui/material/";
 import { DataGrid } from "@mui/x-data-grid";
 import "../styles/body.css";
@@ -45,23 +45,50 @@ const rows = [
   { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
   { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
   { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
+  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
+  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
+  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
+  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
+  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
+  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
+  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
+  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
+  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
+  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
+  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
+  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
+  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
+  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
+  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
+  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
+  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
+  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
 ];
 
 export default function Datarid() {
-  const [activebtn, setActiveBtn] = useState(0);
+  const [activebtn, setActiveBtn] = useState(1);
   const [selectedId, setSelectedId] = useState(null);
   const [advancedbtn, setAdvancedBtn] = useState(true);
+
+  const [searchValue, setSearchValue] = useState("");
 
   const activebutton = (index) => {
     setActiveBtn(index);
   };
-  const handleIdChange = (event, value) => {
-    setSelectedId(value);
-  };
   const rowIds = rows.map((row) => row.id);
 
-  const inputchange = () => {
-    setAdvancedBtn(false);
+  useEffect(() => {}, []);
+
+  const inputChange = (event) => {
+    const value = event.target.value;
+    setSearchValue(value);
+    setAdvancedBtn(value.length === 0);
+    setActiveBtn(3);
+  };
+  const clear = (event) => {
+    setSearchValue("");
+    setAdvancedBtn(true);
+    setActiveBtn(1);
   };
 
   return (
@@ -114,10 +141,14 @@ export default function Datarid() {
           <input
             type="text"
             placeholder="Search Customer Order ID"
-            onChange={inputchange}
+            onChange={inputChange}
             className="searchbox"
+            value={searchValue}
           />
-          <button className={advancedbtn ? "clear-btn-inactive" : "clear-btn"}>
+          <button
+            className={advancedbtn ? "clear-btn-inactive" : "clear-btn"}
+            onClick={clear}
+          >
             Clear
           </button>
           <button
@@ -130,11 +161,11 @@ export default function Datarid() {
       <div className="datagrid">
         <Box
           sx={{
-            height: 400,
+            height: 527,
           }}
         >
           <DataGrid
-            sx={{ backgroundColor: "#666666", color: "white" }}
+            sx={{ backgroundColor: "#666666", color: "white", border: "none" }}
             rows={rows}
             columns={columns}
             filterModel={{
@@ -142,7 +173,12 @@ export default function Datarid() {
                 { columnField: "id", operatorValue: "=", value: selectedId },
               ],
             }}
-            pageSizeOptions={[5, 10, 25]}
+            initialState={{
+              pagination: { paginationModel: { pageSize: 8 } },
+            }}
+            classes={{ footer: "datagrid-footer" }}
+            style={{ color: "white" }}
+            pageSizeOptions={[5, 8, 10, 20, 50, 100]}
             checkboxSelection
             disableRowSelectionOnClick
           />
