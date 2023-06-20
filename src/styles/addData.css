@@ -48,7 +48,7 @@
 .form-button {
   margin: 1em 0;
   display: grid;
-  grid-template-columns: 1.23fr 1.206fr;
+  grid-template-columns: 1.23fr 1.205fr;
   grid-template-rows: 1fr;
   gap: 1em 0.5em;
   grid-template-areas: "btn1 btn2";
