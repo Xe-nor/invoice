@@ -6,7 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  padding: 1em;
+  padding: 0 1em;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -24,7 +24,7 @@ code {
   width: stretch;
   align-self: start;
   justify-content: center;
-  position: relative;
+  position: absolute;
   bottom: 0;
 }
 .privacy {
