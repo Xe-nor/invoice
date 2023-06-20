@@ -1,6 +1,6 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { Box, Autocomplete, TextField } from "@mui/material/";
+import { useState } from "react";
+import { Box } from "@mui/material/";
 import { DataGrid } from "@mui/x-data-grid";
 import "../styles/body.css";
 

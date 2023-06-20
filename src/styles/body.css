@@ -7,6 +7,9 @@
   align-items: center;
   justify-content: space-between;
 }
+.body-container {
+  margin: 1em 0;
+}
 .btn-inactive {
   cursor: pointer;
   display: inline-block;

@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../styles/body.css";
 import Datagrid from "./Datagrid";
+import AddData from "./AddData";
+import Analytics from "./Analytics";
 
 export default function HomePage() {
-  const [activebtn, setActiveBtn] = useState(1);
+  const [activebtn, setActiveBtn] = useState(2);
 
   const [advancedbtn, setAdvancedBtn] = useState(true);
 
@@ -12,8 +14,6 @@ export default function HomePage() {
   const activebutton = (index) => {
     setActiveBtn(index);
   };
-
-  useEffect(() => {}, []);
 
   const inputChange = (event) => {
     const value = event.target.value;
@@ -95,7 +95,9 @@ export default function HomePage() {
         </div>
       </div>
       <div className="main-content">
-        <Datagrid />
+        {activebtn === 1 && <Datagrid />}
+        {activebtn === 2 && <AddData />}
+        {activebtn === 4 && <Analytics />}
       </div>
     </div>
   );
