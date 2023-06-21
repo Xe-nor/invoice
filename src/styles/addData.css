@@ -74,3 +74,7 @@
 .button2 {
   background-color: #db4437;
 }
+.button1:hover,
+.button2:hover {
+  border: 1px solid white;
+}

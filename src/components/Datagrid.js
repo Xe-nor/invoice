@@ -78,7 +78,15 @@ const Datagrid = () => {
         }}
       >
         <DataGrid
-          sx={{ backgroundColor: "#666666", color: "white", border: "none" }}
+          sx={{
+            backgroundColor: "#666666",
+            color: "white",
+            border: "none",
+            checkboxSelection: {
+              color: "red",
+              border: "10px solid blue",
+            },
+          }}
           rows={rows}
           columns={columns}
           filterModel={{
