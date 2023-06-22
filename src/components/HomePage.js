@@ -3,7 +3,13 @@ import "../styles/body.css";
 import Datagrid from "./Datagrid";
 import AddData from "./AddData";
 import Analytics from "./Analytics";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
 
+import Grid from "@material-ui/core/Grid";
+import EditData from "./edit";
 
 export default function HomePage() {
   const [activebtn, setActiveBtn] = useState(1);
@@ -11,6 +17,15 @@ export default function HomePage() {
   const [searchValue, setSearchValue] = useState("");
   const [filteredRows, setFilteredRows] = useState([]);
   const [rows, setRows] = useState([]);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const activebutton = (index) => {
     setActiveBtn(index);
@@ -48,7 +63,7 @@ export default function HomePage() {
   const fetchInvoiceeData = async (pageNumber) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/h2h_milestone_3/read?pageNumber=${pageNumber}`,
+        `http://localhost:8080/h2h_milestone_3/read`,
         { method: "GET" }
       );
       if (response.ok) {
@@ -96,6 +111,12 @@ export default function HomePage() {
             onClick={() => activebutton(4)}
           >
             ANALYTICS VIEW
+          </button>{" "}
+          <button
+            className={activebtn === 5 ? "btn-active" : "btn-inactive"}
+            onClick={() => activebutton(5)}
+          >
+            EDIT DATA
           </button>
         </div>
 
@@ -114,10 +135,50 @@ export default function HomePage() {
             Clear
           </button>
           <button
+            onClick={handleClickOpen}
             className={advancedbtn ? "advanced-btn" : "advanced-btn-inactive"}
           >
             Advanced Search
           </button>
+
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="form-dialog-title"
+          >
+            <DialogContent className="dialog-content">
+              <DialogContentText>Advanced Search</DialogContentText>
+              <Grid container direction="column" spacing={2}>
+                <Grid item>
+                  <input
+                    type="text"
+                    className="dialog-input"
+                    placeholder="Customer Order Id"
+                  />
+                </Grid>
+                <Grid item>
+                  <input
+                    type="text"
+                    className="dialog-input"
+                    placeholder="Customer Number"
+                  />
+                </Grid>
+                <Grid item>
+                  <input
+                    type="text"
+                    className="dialog-input"
+                    placeholder="Sales Org"
+                  />
+                </Grid>
+              </Grid>
+            </DialogContent>
+            <DialogActions>
+              <button className="dialog-btn">Search</button>
+              <button className="dialog-btn" onClick={handleClose}>
+                Cancel
+              </button>
+            </DialogActions>
+          </Dialog>
         </div>
       </div>
       <div className="main-content">
@@ -125,6 +186,7 @@ export default function HomePage() {
         {activebtn === 2 && <AddData />}
         {activebtn === 3 && <Datagrid rows={filteredRows} />}
         {activebtn === 4 && <Analytics />}
+        {activebtn === 5 && <EditData />}
       </div>
     </div>
   );

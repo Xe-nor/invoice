@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../styles/addData.css";
 
-const AddData = () => {
+const EditData = () => {
   const [formData, setFormData] = useState({
+    slno: "",
     customerOrderId: "",
     salesOrg: "",
     distributionChannel: "",
@@ -28,20 +29,23 @@ const AddData = () => {
     }
 
     axios
-      .post("http://localhost:8080/h2h_milestone_3/add", formParams)
+      .post(`http://localhost:8080/h2h_milestone_3/edit`, formParams)
       .then((response) => {
-        // Handle success response
-
-        alert("Data added successfully");
+        if (response.data === "EDITED SUCCESSFULLY") {
+          alert("Data updated successfully");
+        } else {
+          alert("Error occurred while updating data");
+        }
       })
       .catch((error) => {
-        // Handle error
-        alert("Error occurred while adding data", error);
+        console.error("Error occurred while updating data", error);
+        alert("Error occurred while updating data");
       });
   };
 
   const clearForm = () => {
     setFormData({
+      slno: "",
       customerOrderId: "",
       salesOrg: "",
       distributionChannel: "",
@@ -56,7 +60,17 @@ const AddData = () => {
   return (
     <div>
       <div className="container">
-        <div className="inp1 ">
+        <div className="inp1">
+          <input
+            type="number"
+            className="inputbox"
+            placeholder="SLNO"
+            name="slno"
+            value={formData.slno}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="inp2 ">
           <input
             type="number"
             className="inputbox"
@@ -66,7 +80,7 @@ const AddData = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="inp2 ">
+        <div className="inp3 ">
           <input
             type="number"
             className="inputbox"
@@ -76,7 +90,7 @@ const AddData = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="inp3">
+        <div className="inp4">
           <input
             type="text"
             className="inputbox"
@@ -86,7 +100,7 @@ const AddData = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="inp4 ">
+        <div className="inp5">
           <input
             type="number"
             className="inputbox"
@@ -96,7 +110,7 @@ const AddData = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="inp5 ">
+        <div className="inp6 ">
           <input
             type="text"
             className="inputbox"
@@ -106,7 +120,7 @@ const AddData = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="inp6 ">
+        <div className="inp7 ">
           <input
             type="text"
             className="inputbox"
@@ -116,7 +130,7 @@ const AddData = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="inp7 ">
+        <div className="inp8 ">
           <input
             type="number"
             className="inputbox"
@@ -126,7 +140,7 @@ const AddData = () => {
             onChange={handleChange}
           />
         </div>
-        <div className="inp8 ">
+        <div className="inp9 ">
           <input
             type="text"
             className="inputbox"
@@ -140,7 +154,7 @@ const AddData = () => {
       <div className="form-button">
         <div className="btn1">
           <button className="form-btn button1" onClick={handleSubmit}>
-            ADD
+            EDIT
           </button>
         </div>
         <div className="btn2">
@@ -153,4 +167,4 @@ const AddData = () => {
   );
 };
 
-export default AddData;
+export default EditData;

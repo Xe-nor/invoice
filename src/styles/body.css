@@ -82,7 +82,6 @@
   background-color: #666666;
 }
 
-
 .searchbox {
   margin: 0 1em;
   text-align: center;
@@ -95,4 +94,15 @@
 .datagrid-footer {
   border: none;
   color: white;
+}
+.dialog-input {
+  padding: 1em;
+  width: stretch;
+}
+.dialog-btn {
+  padding: 0.5em;
+  width: 100%;
+}
+.edit-input {
+  padding: 0.5em;
 }

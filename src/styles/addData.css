@@ -43,7 +43,7 @@
 .inputbox {
   height: 2em;
   padding: 1em;
-  width: fill;
+  width: stretch;
 }
 .form-button {
   margin: 1em 0;
@@ -77,4 +77,7 @@
 .button1:hover,
 .button2:hover {
   border: 1px solid white;
+}
+.MuiDataGrid-cellCheckbox input[type="checkbox"]:checked {
+  background-color: orange;
 }
