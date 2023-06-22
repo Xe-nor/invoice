@@ -56,7 +56,7 @@ const columns = [
 const Datagrid = ({ rows }) => {
   return (
     <div>
-      <Box sx={{ height: 527 }}>
+       <div style={{ height: 540, width: '100%' }}>
         <DataGrid
           sx={{
             backgroundColor: "#666666",
@@ -75,7 +75,7 @@ const Datagrid = ({ rows }) => {
           checkboxSelection
           disableRowSelectionOnClick
         />
-      </Box>
+     </div>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import Datagrid from "./Datagrid";
 import AddData from "./AddData";
 import Analytics from "./Analytics";
 
+
 export default function HomePage() {
   const [activebtn, setActiveBtn] = useState(1);
   const [advancedbtn, setAdvancedBtn] = useState(true);
