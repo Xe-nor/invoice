@@ -1,82 +1,62 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box } from "@mui/material/";
 import { DataGrid } from "@mui/x-data-grid";
 import "../styles/body.css";
 
 const columns = [
-  { field: "id", headerName: "ID", width: 90 },
+  { field: "slno", headerName: "Sl. No", width: 90 },
+  { field: "customer_order_id", headerName: "Customer Order ID", width: 150 },
+  { field: "sales_org", headerName: "Sales Org", width: 150 },
   {
-    field: "firstName",
-    headerName: "First name",
-    width: 150,
-    editable: true,
+    field: "distribution_channel",
+    headerName: "Distribution Channel",
+    width: 180,
+  },
+  { field: "division", headerName: "Division", width: 120 },
+  {
+    field: "released_credit_value",
+    headerName: "Released Credit Value",
+    width: 180,
   },
   {
-    field: "lastName",
-    headerName: "Last name",
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "age",
-    headerName: "Age",
-    type: "number",
-    width: 110,
-    editable: true,
-  },
-  {
-    field: "fullName",
-    headerName: "Full name",
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
+    field: "purchase_order_type",
+    headerName: "Purchase Order Type",
     width: 160,
-    valueGetter: (params) =>
-      `${params.row.firstName || ""} ${params.row.lastName || ""}`,
   },
+  { field: "company_code", headerName: "Company Code", width: 130 },
+  {
+    field: "order_creation_date",
+    headerName: "Order Creation Date",
+    width: 180,
+  },
+  {
+    field: "order_creation_time",
+    headerName: "Order Creation Time",
+    width: 180,
+  },
+  {
+    field: "credit_control_area",
+    headerName: "Credit Control Area",
+    width: 160,
+  },
+  { field: "sold_to_party", headerName: "Sold to Party", width: 150 },
+  { field: "order_amount", headerName: "Order Amount", width: 130 },
+  {
+    field: "requested_delivery_date",
+    headerName: "Requested Delivery Date",
+    width: 200,
+  },
+  { field: "order_currency", headerName: "Order Currency", width: 130 },
+  { field: "credit_status", headerName: "Credit Status", width: 120 },
+  { field: "customer_number", headerName: "Customer Number", width: 150 },
+  { field: "amount_in_usd", headerName: "Amount in USD", width: 150 },
+  { field: "unique_cust_id", headerName: "Unique Customer ID", width: 180 },
 ];
 
-const rows = [
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-  { id: 1, lastName: "Snow", firstName: "Jon", age: 35 },
-  { id: 2, lastName: "Lannister", firstName: "Cersei", age: 42 },
-  { id: 3, lastName: "Lannister", firstName: "Jaime", age: 45 },
-  { id: 4, lastName: "Stark", firstName: "Arya", age: 16 },
-  { id: 5, lastName: "Targaryen", firstName: "Daenerys", age: null },
-  { id: 6, lastName: "Melisandre", firstName: null, age: 150 },
-  { id: 7, lastName: "Clifford", firstName: "Ferrara", age: 44 },
-  { id: 8, lastName: "Frances", firstName: "Rossini", age: 36 },
-  { id: 9, lastName: "Roxie", firstName: "Harvey", age: 65 },
-];
-
-const Datagrid = () => {
-  const [selectedId, setSelectedId] = useState(null);
-  const rowIds = rows.map((row) => row.id);
+const Datagrid = ({ rows }) => {
   return (
     <div>
-      {" "}
-      <Box
-        sx={{
-          height: 527,
-        }}
-      >
+      <Box sx={{ height: 527 }}>
         <DataGrid
           sx={{
             backgroundColor: "#666666",
@@ -89,16 +69,8 @@ const Datagrid = () => {
           }}
           rows={rows}
           columns={columns}
-          filterModel={{
-            items: [
-              { columnField: "id", operatorValue: "=", value: selectedId },
-            ],
-          }}
-          initialState={{
-            pagination: { paginationModel: { pageSize: 8 } },
-          }}
-          classes={{ footer: "datagrid-footer" }}
           style={{ color: "white" }}
+          pageSize={8}
           pageSizeOptions={[5, 8, 10, 20, 50, 100]}
           checkboxSelection
           disableRowSelectionOnClick

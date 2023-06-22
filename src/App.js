@@ -1,8 +1,9 @@
 import Headerr from "./components/Headerr.js";
 import Footerr from "./components/Footerr.js";
 
-// import Trial from "./components/Trial.js";
+import Trial from "./components/Trial.js";
 import HomePage from "./components/HomePage";
+import { DataGrid } from "@mui/x-data-grid";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <HomePage />
       {/* <Trial /> */}
       <Footerr />
+      {/* <DataGrid /> */}
     </div>
   );
 }

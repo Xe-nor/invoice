@@ -1,90 +1,73 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import ButtonGroup from "@mui/material/ButtonGroup";
-import { useDemoData } from "@mui/x-data-grid-generator";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
+import React, { Component } from "react";
+import axios from "axios";
 
-export default function CustomFooter() {
-  const [status, setStatus] = React.useState("connected");
-  const { data } = useDemoData({
-    dataSet: "Employee",
-    rowLength: 4,
-    maxColumns: 6,
-  });
+class YourComponent extends Component {
+  componentDidMount() {
+    this.fetchData();
+    this.postData();
+    this.updateData();
+    this.deleteData();
+  }
 
-  const apiRef = React.useRef(null);
+  fetchData() {
+    axios
+      .get("http://localhost:8080/h2h_milestone_3/api/invoices")
+      .then((response) => {
+        // Handle the successful GET response here
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // Handle the error response here
+        console.error("GET error:", error);
+      });
+  }
 
-  const handlePageChange = (event, newPage) => {
-    apiRef.current.setPage(newPage - 1);
-  };
+  postData() {
+    axios
+      .post("http://localhost:8080/h2h_milestone_3/api/invoices", {
+        // Provide the data you want to send in the POST request body
+      })
+      .then((response) => {
+        // Handle the successful POST response here
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // Handle the error response here
+        console.error("POST error:", error);
+      });
+  }
 
-  const handleRowsPerPageChange = (event) => {
-    apiRef.current.setPageSize(event.target.value);
-  };
+  updateData() {
+    axios
+      .put("http://localhost:8080/h2h_milestone_3/api/invoices", {
+        // Provide the data you want to send in the PUT request body
+      })
+      .then((response) => {
+        // Handle the successful PUT response here
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // Handle the error response here
+        console.error("PUT error:", error);
+      });
+  }
 
-  const footer = () => {
-    const currentStatus = apiRef.current.status;
-    const message =
-      currentStatus === "connected"
-        ? "Data grid is connected"
-        : "Data grid is not connected";
-    return (
-      <div>
-        <ButtonGroup>
-          <Button>Clear</Button>
-          <Button>Clear</Button>
-          <Button>Clear</Button>
-        </ButtonGroup>
-        <Stack direction="row" spacing={2} alignItems="center">
-          <Pagination
-            count={Math.ceil(
-              apiRef.current.totalRowCount / apiRef.current.rowsPerPage
-            )}
-            page={apiRef.current.page + 1}
-            onChange={handlePageChange}
-          />
-          <select
-            value={apiRef.current.rowsPerPage}
-            onChange={handleRowsPerPageChange}
-          >
-            {apiRef.current.rowsPerPageOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-          <p>Status: {message}</p>
-          <div>
-            <button>Hello</button>
-          </div>
-        </Stack>
-      </div>
-    );
-  };
+  deleteData() {
+    axios
+      .delete("http://localhost:8080/h2h_milestone_3/api/invoices")
+      .then((response) => {
+        // Handle the successful DELETE response here
+        console.log(response.data);
+      })
+      .catch((error) => {
+        // Handle the error response here
+        console.error("DELETE error:", error);
+      });
+  }
 
-  return (
-    <Box sx={{ height: 400, width: "100%", mb: 1 }}>
-      <DataGrid
-        {...data}
-        apiRef={apiRef}
-        rowsPerPageOptions={[8, 25, 50]}
-        rowsPerPage={8}
-        pagination
-        components={{
-          Toolbar: GridToolbar,
-        }}
-        componentsProps={{
-          toolbar: {
-            apiRef: apiRef,
-          },
-        }}
-        slots={{
-          Footer: footer,
-        }}
-      />
-    </Box>
-  );
+  render() {
+    return <div>Your component content here</div>;
+  }
 }
+
+export default YourComponent;
