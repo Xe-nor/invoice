@@ -24,8 +24,8 @@ code {
   width: stretch;
   align-self: start;
   justify-content: center;
-  position: absolute;
-  bottom: 0;
+  /* position: absolute;
+  bottom: 0; */
 }
 .privacy {
   color: #4c72d5ff;

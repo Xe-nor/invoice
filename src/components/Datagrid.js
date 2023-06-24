@@ -59,8 +59,7 @@ const columns = [
 
 const Datagrid = ({ rows }) => {
   const [dataRows, setDataRows] = useState(rows);
-
-  const [openedit, setOpenedit] = React.useState(false);
+  // const [openedit, setOpenedit] = React.useState(false);
   const [editData, setEditData] = useState({});
   // const [selectedRows, setSelectedRows] = useState([]);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
@@ -109,13 +108,13 @@ const Datagrid = ({ rows }) => {
       [name]: value,
     }));
   };
-  const handleClickOpenedit = () => {
-    setOpenedit(true);
-  };
+  // const handleClickOpenedit = () => {
+  //   setOpenedit(true);
+  // };
 
-  const handleCloseedit = () => {
-    setOpenedit(false);
-  };
+  // const handleCloseedit = () => {
+  //   setOpenedit(false);
+  // };
   const handleRefresh = async () => {
     try {
       const response = await fetch(
@@ -127,7 +126,9 @@ const Datagrid = ({ rows }) => {
           ...row,
           id: index + 1,
         }));
-        setDataRows(rowsWithId);
+        setTimeout(() => {
+          setDataRows(rowsWithId);
+        }, 2000);
       } else {
         console.error("Refresh request failed.");
       }
@@ -138,7 +139,7 @@ const Datagrid = ({ rows }) => {
 
   return (
     <div>
-      <div style={{ height: 540, width: "100%" }}>
+      <div style={{ height: 538, width: "100%" }}>
         <style>
           {`
             .MuiCheckbox-colorPrimary.Mui-checked .MuiSvgIcon-root {
@@ -171,15 +172,10 @@ const Datagrid = ({ rows }) => {
             backgroundColor: "#666666",
             color: "white",
             border: "none",
-            checkboxSelection: {
-              color: "red",
-              border: "10px solid blue",
-            },
           }}
           rows={dataRows}
           columns={columns}
           checkboxSelection
-          onSelectionModelChange={console.log("hi")}
           style={{ color: "white" }}
           pageSize={8}
           pageSizeOptions={[5, 8, 10, 20, 50, 100]}
@@ -209,19 +205,19 @@ const Datagrid = ({ rows }) => {
             variant="contained"
             color="primary"
             style={{ backgroundColor: "#fc7500" }}
-            onClick={handleClickOpenedit}
+            // onClick={handleClickOpenedit}
             disabled
           >
             Edit
           </Button>
 
           {/* Edit dialog */}
-          <Dialog open={openedit} onClose={handleCloseedit}>
+          {/* <Dialog open={openedit} onClose={handleCloseedit}>
             <DialogContent>
               <DialogContentText>Edit</DialogContentText>
               <form>
                 <div>
-                  {/* First row inputs */}
+                 
                   <input
                     type="text"
                     label="Input 1"
@@ -243,7 +239,7 @@ const Datagrid = ({ rows }) => {
                   />
                 </div>
                 <div>
-                  {/* Second row input */}
+                
                   <input
                     placeholder="DISTRIBUTION CHANNEL"
                     style={{ width: "-webkit-fill-available" }}
@@ -263,7 +259,7 @@ const Datagrid = ({ rows }) => {
               </button>
               <button className="dialog-btn">Edit</button>
             </DialogActions>
-          </Dialog>
+          </Dialog> */}
           <Button
             variant="contained"
             color="primary"
@@ -287,12 +283,12 @@ const Datagrid = ({ rows }) => {
               />
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleCloseDeleteDialog} color="primary">
+              <button className="dialog-btn" onClick={handleCloseDeleteDialog}>
                 Cancel
-              </Button>
-              <Button onClick={handleDelete} color="primary">
+              </button>
+              <button onClick={handleDelete} className="dialog-btn">
                 Delete
-              </Button>
+              </button>
             </DialogActions>
           </Dialog>
           <Button variant="contained" color="primary" disabled>

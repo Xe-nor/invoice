@@ -17,24 +17,28 @@ export default function HomePage() {
   const [searchValue, setSearchValue] = useState("");
   const [filteredRows, setFilteredRows] = useState([]);
   const [rows, setRows] = useState([]);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
+    //open adv search dialogbox
     setOpen(true);
   };
 
   const handleClose = () => {
+    //close adv search dialogbox
     setOpen(false);
   };
 
   const activebutton = (index) => {
+    //set the active tab
     setActiveBtn(index);
   };
 
   const inputChange = (event) => {
+    //for search box
     const value = event.target.value;
     setSearchValue(value);
-    setAdvancedBtn(value.length === 0);
+    setAdvancedBtn(value.length === 0); //adv button true if no value is present
     setActiveBtn(3);
   };
 
@@ -46,6 +50,7 @@ export default function HomePage() {
   };
 
   useEffect(() => {
+    //triggered for changes in searchValue
     if (searchValue.length > 0) {
       const filtered = rows.filter((row) =>
         row.customer_order_id.toLowerCase().includes(searchValue.toLowerCase())
@@ -56,11 +61,7 @@ export default function HomePage() {
     }
   }, [searchValue, rows]);
 
-  useEffect(() => {
-    fetchInvoiceeData(1); // Pass the default page number
-  }, []);
-
-  const fetchInvoiceeData = async (pageNumber) => {
+  const fetchInvoiceeData = async () => {
     try {
       const response = await fetch(
         `http://localhost:8080/h2h_milestone_3/read`,
@@ -68,13 +69,11 @@ export default function HomePage() {
       );
       if (response.ok) {
         const data = await response.json();
-
         // Add a unique id for each row
         const rowsWithId = data.map((row, index) => ({
           ...row,
           id: index + 1,
         }));
-
         setRows(rowsWithId);
       } else {
         console.error("Failed to fetch data from the servlet.");
@@ -83,6 +82,10 @@ export default function HomePage() {
       console.error("Error while fetching data:", error);
     }
   };
+  useEffect(() => {
+    // fetch only once
+    fetchInvoiceeData(1);
+  }, []);
 
   return (
     <div className="body-container">
@@ -146,7 +149,7 @@ export default function HomePage() {
             onClose={handleClose}
             aria-labelledby="form-dialog-title"
           >
-            <DialogContent className="dialog-content">
+            <DialogContent className="dialog-content ">
               <DialogContentText>Advanced Search</DialogContentText>
               <Grid container direction="column" spacing={2}>
                 <Grid item>

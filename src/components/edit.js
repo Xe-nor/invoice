@@ -21,13 +21,10 @@ const EditData = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const formParams = new URLSearchParams();
-
     for (let key in formData) {
       formParams.append(key, formData[key]);
     }
-
     axios
       .post(`http://localhost:8080/h2h_milestone_3/edit`, formParams)
       .then((response) => {
@@ -102,7 +99,7 @@ const EditData = () => {
         </div>
         <div className="inp5">
           <input
-            type="number"
+            type="text"
             className="inputbox"
             placeholder="Customer Number"
             name="customerNumber"
